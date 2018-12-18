@@ -1,0 +1,419 @@
+import particles/base.psf
+
+Test2 {
+	base:Simple
+	time:300|500
+	tr:TR_LINEAR
+	radius {
+		start:10
+		end:50|80
+	}
+	color {
+		start:[1,.5,0]
+		end:[0,0,0]
+	}
+	emit {
+		time:10
+		delay:100
+		spread:360
+		speed:50|100*3
+		count:10
+	}
+}
+
+Trails {
+//	base:Simple
+	shader {
+		"railCore"
+		"flareshader"
+	}
+	render:RT_TRAIL
+	type:LE_FRAGMENT
+	//tr:TR_LINEAR
+	time:500|1000*4
+	trail {
+		length:100
+		fade:FT_COLOR
+	}
+	radius {
+		start:5|6*10
+		end:1
+	}
+	color {
+		start:[0,1,0.1]-HSV
+		end:[0,0,0]
+	}
+	emit {
+		time:0
+		delay:2
+		speed:1000/3
+		spread:360
+		count:10
+	}
+}
+
+StaticTrail {
+	base:Trails
+	tr:TR_STATIONARY
+}
+
+StaticTrailBlue {
+	base:Trails
+	tr:TR_STATIONARY
+	color {
+		start:[160,1,0.1]-HSV
+		end:[0,0,1]
+	}
+	trail {
+		length:100
+		fade:FT_RADIUS
+	}
+}
+
+ModelTest {
+	base:Simple
+	shader:null
+	render:RT_MODEL
+	scale:[1,1,1]*.75
+	angle:[0,0,0]|[360,360,360]
+	spin:[-300,-300,-300]|[300,300,300]
+	time:1000|2000
+	bounce:.1|.3
+	stopped {
+		spin:[0,0,0]
+	}
+	model {
+		"models/gibs/abdomen.md3"
+		"models/gibs/arm.md3"
+		"models/gibs/chest.md3"
+		"models/gibs/fist.md3"
+		"models/gibs/foot.md3"
+		"models/gibs/forearm.md3"
+		"models/gibs/intestine.md3"
+		"models/gibs/leg.md3"
+		"models/gibs/brain.md3"
+		"models/gibs/skull.md3"
+	}
+	emit {
+		time:1
+		delay:2
+		speed:100|250
+		spread:120
+		count:15|20
+		attachstatic {
+			StaticTrail
+		}
+		attach {
+			//SimpleSlow
+		}
+	}
+}
+
+Test {
+	shader:"flareshader"
+	render:RT_SPRITE
+	type:LE_FRAGMENT
+	time:400
+	scale:[1,1,1]
+	radius {
+		start:0|80
+		end:0
+	}
+	color {
+		start:[EMITTER_TIME,EMITTER_TIME,EMITTER_TIME/2]*EMITTER_TIME
+		end:[0,1-EMITTER_TIME*EMITTER_TIME,0]
+	}
+	emit {
+		time:1
+		delay:2
+		spread:360
+		speed:50|100*3
+		count:20
+		attach {
+			SimpleSlow
+		}
+		attachstatic {
+			//StaticTrail
+		}
+		others {
+//			Trails
+			Test2
+		}
+	}
+}
+
+Tendrils {
+	type:LE_FRAGMENT
+	render:RT_TRAIL
+	time:2400|2800
+	shader:"railCore"
+	tr:TR_LINEAR
+	radius {
+		start:1|4
+		end:0
+	}
+	color {
+		start:[1,.7,.2]
+		end:[1,1,1]
+	}
+	trail {
+		length:100
+		fade:FT_RADIUS
+	}
+	physics {
+		"wavey"
+		"attract"
+	}
+	emit {
+		time:0
+		delay:2
+		speed:80|200
+		spread:100
+		count:5|10
+		others {
+			SparkFlash
+		}
+		attachstatic {
+			StaticTrailBlue
+		}
+	}
+}
+
+ItemSpawnFlash {
+	base:SimpleSlow
+	time:100
+	init {
+		"colorize"
+	}
+	emit {
+		time:0
+		delay:2
+		count:5
+	}
+}
+
+ItemPickup {
+	base:SimpleSlow
+	time:1000
+	tr:TR_LINEAR
+	render:RT_TRAIL
+	shader:"railCore"
+	radius {
+		start:8
+		end:0
+	}
+	//type:LE_FRAGMENT
+	//tr:TR_LINEAR
+	//time:500|1000*4
+	trail {
+		length:40
+		fade:FT_RADIUS
+	}
+	color {
+		start:[1,1,1,1]
+		end:[0,0,0,0]
+	}
+	physics {
+		"wavey"
+		"friction"
+	}
+	emit {
+		time:0
+		delay:2
+		speed:700
+		spread:100
+		count:10
+	}
+}
+
+ItemSpawn {
+	base:Tendrils
+	time:300|500
+	radius {
+		start:10|20
+		end:0
+	}
+	color {
+		start:[1,1,1]
+		end:[1,1,1]
+	}
+	init {
+		"colorize"
+	}
+	physics {
+		"wavey"
+	}
+	emit {
+		time:100
+		delay:60
+		speed:200
+		spread:180
+		count:1 //2|4
+		others {
+			ItemSpawnFlash
+		}
+	}
+}
+
+InitTest {
+	base:SimpleSlow
+	time:800
+	tr:TR_LINEAR
+	render:RT_TRAIL
+	shader:"railCore"
+	radius {
+		start:3
+		end:0
+	}
+	trail {
+		length:40
+		fade:FT_RADIUS
+	}
+	init {
+		"onRing"
+		"velFromOffset"
+	}
+	physics {
+		"wavey"
+	}
+	emit {
+		time:0
+		delay:0
+		speed:100
+		spread:0
+		count:25
+	}
+}
+
+[CODE]
+	particletools.registerInitializer("colorize",function(le,pa)
+		if(pa.color) then
+			le:SetStartColor(pa.color[1],pa.color[2],pa.color[3],pa.color[4])
+			le:SetEndColor(pa.color[1],pa.color[2],pa.color[3],pa.color[4])
+		end
+	end)
+
+	particletools.registerInitializer("velFromOffset",function(le,pa)
+		if(pa.pos) then
+			local p = le:GetPos()
+			local d = (p - pa.pos)
+			d = d / VectorLength(d)
+			if(pa.speed) then
+				d = d * pa.speed
+			else
+				d = d * VectorLength(le:GetVelocity())
+			end
+			le:SetVelocity(d)
+		end
+	end)
+
+	particletools.registerInitializer("inBox",function(le,pa)
+		if(pa.spawnbox) then
+			local p = le:GetPos()
+			le:SetPos(p + VectorRandom()*pa.spawnbox)
+		end
+	end)
+	
+	particletools.registerInitializer("onRing",function(le,pa)
+		if(pa.spawnradius) then
+			local rad = pa.spawnradius
+			local op = le:GetPos()
+			
+			local r = (math.random()*360)/57.3
+			local x = math.cos(r) * rad
+			local y = math.sin(r) * rad
+			
+			local p = Vector()
+			p.z = op.z
+			p.x = op.x + x
+			p.y = op.y + y
+			
+			le:SetPos(p)
+		end
+	end)
+
+	particletools.registerInitializer("inSphere",function(le,pa)
+		if(pa.spawnradius) then
+			local rad = pa.spawnradius
+			local op = le:GetPos()
+			local p = le:GetPos() + VectorRandom()*(rad*2)
+			local d = VectorLength(p - op)
+			local a = (p - op) / d
+			
+			
+			if(d > pa.spawnradius) then
+				p = p - a * (d - pa.spawnradius)
+			end
+			
+			
+			le:SetPos(p)
+		end
+	end)
+
+	particletools.registerPhysicsModule("friction",function(le,pa)
+		if(pa.friction) then
+			local v = le:GetVelocity()
+			local vl = VectorLength(v)
+			local vn = v / vl
+			
+			vl = vl - pa.friction * (LOCALENT_DT / 50)
+			if(vl < 0 and pa.noclamp ~= true) then vl = 0 end
+			
+			le:SetVelocity(vn * vl)
+		end		
+	end)
+
+	particletools.registerPhysicsModule("attract",function(le,pa)
+		if(pa.pos and pa.speed) then
+			local p = le:GetPos()
+			local v = le:GetVelocity()
+			local dir = VectorNormalize(pa.pos - p)
+			le:SetVelocity(v + dir * pa.speed * (LOCALENT_DT / 50))
+		end
+	end)
+	
+	particletools.registerPhysicsModule("spin",function(le,pa)
+		if(le:GetTable().fr == nil) then
+			le:GetTable().fr = 1
+			local vr = VectorRandom() * 30
+			vr.z = 0
+			le:SetPos(le:GetPos() + vr)
+		end
+		if(pa.pos and pa.speed) then
+			local p = le:GetPos()
+			local p2 = pa.pos
+			local dt = (LOCALENT_DT / 50)
+			
+			local vx = le:GetVelocity()
+			vx.z = 0
+			
+			local dp = (p - p2)
+			dp.z = 0
+			local r = pa.spin or (3.14 / 50)
+			local x = -dp.x
+			local y = -dp.y
+			
+			vx.x = (math.cos(r)*x) - (math.sin(r)*y)
+			vx.y = (math.sin(r)*x) + (math.cos(r)*y)
+			
+			local v = le:GetVelocity()
+			local dir = VectorNormalize(pa.pos - p)
+			le:SetVelocity(v + vx * math.abs(pa.speed) * dt)
+		end
+	end)	
+	
+	particletools.registerPhysicsModule("wavey",function(le,pa)
+		local tab = le:GetTable()
+		local lt = LevelTime()
+		tab.vm = tab.vm or Vector(0,0,0)
+		tab.change = tab.change or 0
+		
+		local v = le:GetVelocity()
+		le:SetVelocity(v + tab.vm * (LOCALENT_DT / 50))
+		
+		if(tab.change < lt) then
+			tab.vm = VectorRandom() * (pa.speed*4 or 10)
+			tab.change = lt + 200
+		end
+	end)
+[/CODE]

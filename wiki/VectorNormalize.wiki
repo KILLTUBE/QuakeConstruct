@@ -1,0 +1,3 @@
+|| Arguments: || vec([Vector]) ||
+|| Returns: || a normalized copy of the provided [Vector] ||
+|| Example: || <none> ||

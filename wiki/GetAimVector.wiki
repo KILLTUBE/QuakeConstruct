@@ -1,0 +1,3 @@
+|| Arguments: || <none> ||
+|| Returns: || a [Vector] representation of the player's view angle ||
+|| Example: || <none> ||

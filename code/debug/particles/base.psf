@@ -1,0 +1,51 @@
+//Example particle system
+//supports operators such as + - * /
+//supports new | range operator
+//EMITTER_TIME is the lifetime of the emitter
+//you can include other psf files via
+//import particles/<yourfile>.psf
+//look at cl_particletools.lua
+//to find out more about this stuff
+
+Simple {
+	base:null
+	shader:"flareshader"
+	type:LE_FRAGMENT
+	time:1000
+	render:RT_SPRITE
+	scale {
+		start:10
+		end:0
+	}
+	color {
+		start:[1,1,1]
+		end:[0,0,0]
+	}
+	emit {
+		time:5000
+		delay:10
+		spread:360
+		speed:50|100
+	}
+}
+
+SimpleSlow {
+	base:Simple
+	type:LE_FADE_TWEEN
+	tr:TR_STATIONARY
+	time:500
+	color {
+		start:[1,1,1]/2
+		end:[0,0,0]
+	}
+	radius {
+		start:30
+		end:40
+	}
+	emit {
+		time:1000|4000
+		delay:100
+		speed:1000/3
+		spread:360
+	}
+}

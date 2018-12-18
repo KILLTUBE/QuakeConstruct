@@ -1,0 +1,34 @@
+#summary Lua Bindings For Quake Construct.
+
+==[Entity] ([Object])==
+
+|| [Q3GAME] || [Entity]:[AddEvent]() ||
+|| [Q3GAME] || [Entity]:[Classname]() ||
+|| [Q3GAME] || [Entity]:[Damage]() ||
+|| [Q3GAME] || [Entity]:[EntIndex]() ||
+|| [Q3GAME] || [Entity]:[GetAimVector]() ||
+|| [Q3GAME] || [Entity]:[GetInfo]() ||
+|| [Q3GAME] || [Entity]:[GetMuzzlePos]() ||
+|| [Q3GAME] || [Entity]:[GetParent]() ||
+|| [Q3GAME] || [Entity]:[GetPos]() ||
+|| [Q3GAME] || [Entity]:[GetVelocity]() ||
+|| [Q3GAME] || [Entity]:[GiveWeapon]() ||
+|| [Q3GAME] || [Entity]:[IsBot]() ||
+|| [Q3GAME] || [Entity]:[IsPlayer]() ||
+|| [Q3GAME] || [Entity]:[PlaySound]() ||
+|| [Q3GAME] || [Entity]:[Remove]() ||
+|| [Q3GAME] || [Entity]:[RemovePowerups]() ||
+|| [Q3GAME] || [Entity]:[RemoveWeapons]() ||
+|| [Q3GAME] || [Entity]:[SendMessage]() ||
+|| [Q3GAME] || [Entity]:[SetAmmo]() ||
+|| [Q3GAME] || [Entity]:[SetCallback]() ||
+|| [Q3GAME] || [Entity]:[SetInfo]() ||
+|| [Q3GAME] || [Entity]:[SetPos]() ||
+|| [Q3GAME] || [Entity]:[SetPowerup]() ||
+|| [Q3GAME] || [Entity]:[SetVelocity]() ||
+|| [Q3GAME] || [Entity]:[SetWeapon]() ||
+
+==[hook] ([Library])==
+
+|| [[Q3GAME]] || [hook].[add]() ||
+|| [[Q3GAME]] || [hook].[hashook]() ||

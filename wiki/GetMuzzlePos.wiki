@@ -1,0 +1,3 @@
+|| Arguments: || <none> ||
+|| Returns: || a [Vector] representation of the muzzle location of the player's weapon ||
+|| Example: || <none> ||

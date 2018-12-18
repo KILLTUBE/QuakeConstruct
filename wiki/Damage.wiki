@@ -1,0 +1,3 @@
+|| Arguments: || inflictor([Entity]), attacker([Entity]), damage(number), meansOfDeath(number) ||
+|| Returns: || <nothing> ||
+|| Example: || <none> ||

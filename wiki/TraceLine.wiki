@@ -1,0 +1,7 @@
+|| Arguments: || start([Vector]),end([Vector]),<ignore([Entity])>,<mask(number)>,<min([Vector])>,<max([Vector])> ||
+|| Returns: || [TraceData] ||
+|| Example: || <none> ||
+
+*Notes:*
+
+Most of the arguments in this function are optional (denoted by '<' and '>')

@@ -1,0 +1,3 @@
+|| Arguments: || <none> ||
+|| Returns: || classname of the entity as a string ||
+|| Example: || <none> ||

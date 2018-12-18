@@ -1,0 +1,15 @@
+==Enumeration:==
+
+ * PW_NONE,
+
+ * PW_QUAD,
+ * PW_BATTLESUIT,
+ * PW_HASTE,
+ * PW_INVIS,
+ * PW_REGEN,
+ * PW_FLIGHT,
+
+ * PW_REDFLAG,
+ * PW_BLUEFLAG,
+
+ * PW_NUM_POWERUPS

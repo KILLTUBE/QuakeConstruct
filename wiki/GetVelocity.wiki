@@ -1,0 +1,3 @@
+|| Arguments: || <none> ||
+|| Returns: || a [Vector] representation of the [Entity]'s velocity. ||
+|| Example: || <none> ||

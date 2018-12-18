@@ -1,0 +1,1 @@
+All entities in Quake3 are represented as an "Entity" Userdata Object.

@@ -1,0 +1,18 @@
+Currently, a [Vector] is just a table containing 3 variables, x, y, and z.
+
+Vector can be called as a function to create a new vector:
+
+Vector(x (number),y (number),z (number) )
+
+*Vector functions include:*
+
+ * [vAdd]
+ * [vSub]
+ * [vMul]
+ * [Vector]
+ * [VectorNormalize]
+ * [VectorLength]
+ * [VectorForward]
+ * [VectorRight]
+ * [VectorUp]
+ * [TraceLine]

@@ -1,0 +1,5 @@
+|| Arguments: || callbackid(number), callbackfunction(function) ||
+|| Returns: || <none> ||
+|| Example: || entity:SetCallback(ENTITY_CALLBACK_TOUCH,function() print("entity touched something\n") end) ||
+
+Set's a function to be called when an entity performs a particular action.

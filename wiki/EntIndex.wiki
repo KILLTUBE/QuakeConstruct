@@ -1,0 +1,3 @@
+|| Arguments: || <none> ||
+|| Returns: || the quake3 internal index of the entity ||
+|| Example: || <none> ||

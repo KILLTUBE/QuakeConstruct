@@ -1,0 +1,3 @@
+|| Arguments: || v1([Vector]), v2([Vector]) ||
+|| Returns: || the difference of the 2 provided vectors([Vector]) ||
+|| Example: || <none> ||

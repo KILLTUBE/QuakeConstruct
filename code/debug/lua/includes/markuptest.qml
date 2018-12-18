@@ -1,0 +1,7 @@
+[bgcolor r=.02,g=.2,b=.6]
+[font w=8, h=8, r=1,g=1,b=1]
+This is a test of the [link text='QuakeConstruct Markup Language', dest=1lua/includes/markuptest2.qml].[nl]
+I hope it works out ok.[nl][nl]
+also, I rule![nl][nl][nl]
+[font w=20, h=20, r=0,g=1,b=0]Here's a picture:[nl]
+[image src=gfx/misc/teleportEffect2.jpg, w=256, h=256]

@@ -1,0 +1,3 @@
+|| Arguments: || [powerup_t](number), time(number) ||
+|| Returns: || <nothing> ||
+|| Example: || <none> ||

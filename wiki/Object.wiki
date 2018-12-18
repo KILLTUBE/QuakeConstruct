@@ -1,0 +1,4 @@
+A Userdata representation of a quake3 pointer.
+Usually these Userdata values contain a table of functions
+To call a function on an object use the following syntax:
+||`object:function()`||

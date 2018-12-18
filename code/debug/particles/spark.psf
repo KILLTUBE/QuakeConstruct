@@ -1,0 +1,66 @@
+SparkFlash {
+	render:RT_SPRITE
+	time:100|200
+	shader:"flareshader"
+	type:LE_FADE_TWEEN
+	tr:TR_STATIONARY
+	radius {
+		start:5|6
+		end:7|10
+	}
+	color {
+		start:[1,.8,.6]
+		end:[0,0,0]
+	}
+	emit {
+		time:0
+		delay:2
+		speed:1
+		spread:1
+		count:2
+	}
+}
+
+BigSparks {
+	type:LE_FRAGMENT
+	render:RT_TRAIL
+	time:100|200
+	shader:"railCore"
+	tr:TR_LINEAR
+	radius {
+		start:1|4
+		end:0
+	}
+	color {
+		start:[1,.7,.2]
+		end:[1,1,1]
+	}
+	emit {
+		time:0
+		delay:2
+		speed:300|600
+		spread:20
+		count:5|10
+		others {
+			SparkFlash
+		}
+	}
+}
+
+Spark {
+	base:BigSparks
+	color {
+		start:[1,.7,.2]/2
+		end:[1,1,1]/2
+	}
+	emit {
+		time:0
+		delay:2
+		speed:100|200
+		spread:100
+		count:5|10
+		others {
+			BigSparks
+		}
+	}
+}

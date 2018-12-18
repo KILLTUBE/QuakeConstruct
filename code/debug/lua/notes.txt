@@ -1,0 +1,118 @@
+Hooks:
+	Think()
+	ClientThink(player) //Called after real think
+	EntityUnlinked(ent) //Called when an entity has been unlinked
+	FiredWeapon(player,weapon,delay,pos,angle)
+	PlayerDamaged(target,inflictor,attacker,damage,meansOfDeath,dir,origin)
+	PlayerKilled(target,inflictor,attacker,damage,meansOfDeath)
+	PlayerSpawned(player)
+	PlayerJoined(player)
+	PlayerDisconnected(player)
+	ShouldDropItem(classname)
+
+	These are hooks that the engine calls in lua
+	so whenever a player drops an item, the engine calls "ShouldDropItem"
+	if you return false, the item will not be dropped
+	if you return true or don't return at all, the item will be dropped
+	Example shown:
+	
+local function shouldDrop(class)
+	if(class) then
+		if(string.find(class,"rocket") or string.find(class,"bfg") or string.find(class,"grenade")) then
+			return false
+		end
+	end
+end
+hook.add("ShouldDropItem","ShouldDropTest",shouldDrop)
+	
+	if the name of the item contains "rocket" or "bfg" or "grenade" then don't let the item be dropped.
+	this was to keep bots from using the uber awesome weapons :P
+	
+local function PlayerSpawned(cl)
+	cl:SetInfo(PLAYERINFO_HEALTH,100)
+	if(!cl:IsBot()) then
+		cl:GiveWeapon(WP_ROCKET_LAUNCHER)
+		cl:SetWeapon(WP_ROCKET_LAUNCHER)
+		cl:SetAmmo(WP_ROCKET_LAUNCHER,-1)
+
+		cl:GiveWeapon(WP_GRENADE_LAUNCHER)
+		cl:SetWeapon(WP_GRENADE_LAUNCHER)
+		cl:SetAmmo(WP_GRENADE_LAUNCHER,-1)
+		
+		cl:GiveWeapon(WP_PLASMAGUN)
+		cl:SetWeapon(WP_PLASMAGUN)
+		cl:SetAmmo(WP_PLASMAGUN,-1)
+	end
+end
+hook.add("PlayerSpawned","PlayerSpawnedTest",PlayerSpawned)
+	
+	Another hook called by the engine, this one is called whenever a player spawns
+	I tell it here that if the player is not a bot !cl:IsBot() then we give, set, ammo each of these
+	weapons.
+	
+	the variables WP_<weapon> are defined in .enum files.
+	mainly weapon.enum shown.
+	
+	Firerate of a weapon can be adjusted with this hook:
+
+local function FiredWeapon(player,weapon,delay,pos,angle)
+	return <your firerate delay>
+end
+hook.add("FiredWeapon","FiredWeaponTest",FiredWeapon)
+
+	you can also do
+	
+local function FiredWeapon(player,weapon,delay,pos,angle)
+	return delay/4 --4x firerate.
+end
+hook.add("FiredWeapon","FiredWeaponTest",FiredWeapon)	
+
+	Let me mention this also
+	Entites are managed as userdata
+	so when you look at this hook Fired Weapon, we get a few things to work with
+	The player, the Weapon, delay, angle, pos etc.
+	you can call functions on the player like.
+	
+	player:SetWeapon
+	player:GiveWeapon
+	player:SetVelocity
+	player:GetVelocity
+	player:GetInfo
+	
+	I'll make a detailed list in a bit, to show you.
+	
+Entity Functions:
+  {"GetInfo",		qlua_getclientinfo},  		entity:GetInfo()[infotoget] --Returns... something.
+  {"SetInfo",		qlua_setclientinfo}, 		entity:SetInfo(info,value)
+  {"GetPos",		qlua_getpos},		 		entity:GetPos() --Returns a vector
+  {"SetPos",		qlua_setpos},		 		entity:SetPos(vector)
+  {"GetMuzzlePos",	qlua_getmuzzlepos},	 		entity:GetMuzzlePos() --Returns a vector
+  {"GetAimAngles",		qlua_aimvec},	 		entity:GetAimAngles() (might want to normalize it)
+  {"GetVelocity",		qlua_getvel},    		entity:GetVelocity() --Returns a vector
+  {"SetVelocity",		qlua_setvel},	  		entity:SetVelocity(vector)
+  {"SetWeapon",		qlua_setweapon},      		entity:SetWeapon(weaponid)
+  {"GiveWeapon",	qlua_giveweapon},     		entity:GiveWeapon(weaponid)
+  {"SetAmmo",		qlua_setammo},		  		entity:SetAmmo(weaponid,ammo)
+  {"SetPowerup",	qlua_setpowerup},	  		entity:SetPowerup(pwid,time)
+  {"RemoveWeapons", qlua_removeweapons},  		entity:RemoveWeapons()
+  {"RemovePowerups",	qlua_removepowerups},	entity:RemovePowerups()
+  {"Damage",		qlua_damageentity},			entity:Damage(attacker(Entity),inflictor(Entity),damage,damagetype(MOD_ROCKET))
+  {"SendMessage",	qlua_sendtexttoentity},		entity:SendMessage(message(String),center(true/false))
+  {"Isentity",		qlua_isclient},				entity:IsPlayer() --Returns true or false
+  {"IsBot",			qlua_isbot},				entity:IsBot() --Returns true or false
+  {"Classname",		qlua_getclass},				entity:Classname() --Returns a string
+  {"Remove",		qlua_removeentity},			entity:Remove()
+  {"EntIndex",		qlua_entityid},				entity:EntIndex()
+  {"AddEvent",		qlua_addevent},				entity:AddEvent(event(Number),option(Number)) --kind of a test,
+  {"PlaySound",		qlua_playsound},			entity:PlaySound(soundname(String))
+  {"GetParent",		qlua_getparent},			entity:GetParent() --Returns an Entity
+  {"SetCallback",	qlua_setcallback},			entity:SetCallback(callback(Number),func(Function))
+};
+
+MOD(methodOfDeath)s are stored in player.enum
+PLAYERINFO(used for entity:SetInfo()[]) are stored in player.enum (usage) entity:SetInfo(PLAYERINFO_SCORE,100)
+WP(weapon)s are stored in weapon.enum
+EV(entity events) are stored in events.enum (most of them don't work)
+PW(powerup) are stored in powerup.enum
+
+That should about cover it

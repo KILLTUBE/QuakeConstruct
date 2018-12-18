@@ -1,0 +1,1 @@
+Internal used by hooks.lua, do not use this unless you know what you're doing.

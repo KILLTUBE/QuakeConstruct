@@ -1,0 +1,5 @@
+|| Arguments: || <none> ||
+|| Returns: || <nothing> ||
+|| Example: || <none> ||
+
+Removes the given [Entity] from the level.

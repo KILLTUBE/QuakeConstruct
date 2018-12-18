@@ -1,0 +1,3 @@
+|| Arguments: || vec([Vector]) ||
+|| Returns: || the length of the provided [Vector] as a number ||
+|| Example: || <none> ||

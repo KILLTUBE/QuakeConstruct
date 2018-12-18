@@ -1,0 +1,188 @@
+typedef enum {
+	K_TAB = 9,
+	K_ENTER = 13,
+	K_ESCAPE = 27,
+	K_SPACE = 32,
+
+	K_BACKSPACE = 127,
+
+	K_COMMAND = 128,
+	K_CAPSLOCK,
+	K_POWER,
+	K_PAUSE,
+
+	K_UPARROW,
+	K_DOWNARROW,
+	K_LEFTARROW,
+	K_RIGHTARROW,
+
+	K_ALT,
+	K_CTRL,
+	K_SHIFT,
+	K_INS,
+	K_DEL,
+	K_PGDN,
+	K_PGUP,
+	K_HOME,
+	K_END,
+
+	K_F1,
+	K_F2,
+	K_F3,
+	K_F4,
+	K_F5,
+	K_F6,
+	K_F7,
+	K_F8,
+	K_F9,
+	K_F10,
+	K_F11,
+	K_F12,
+	K_F13,
+	K_F14,
+	K_F15,
+
+	K_KP_HOME,
+	K_KP_UPARROW,
+	K_KP_PGUP,
+	K_KP_LEFTARROW,
+	K_KP_5,
+	K_KP_RIGHTARROW,
+	K_KP_END,
+	K_KP_DOWNARROW,
+	K_KP_PGDN,
+	K_KP_ENTER,
+	K_KP_INS,
+	K_KP_DEL,
+	K_KP_SLASH,
+	K_KP_MINUS,
+	K_KP_PLUS,
+	K_KP_NUMLOCK,
+	K_KP_STAR,
+	K_KP_EQUALS,
+
+	K_MOUSE1,
+	K_MOUSE2,
+	K_MOUSE3,
+	K_MOUSE4,
+	K_MOUSE5,
+
+	K_MWHEELDOWN,
+	K_MWHEELUP,
+
+	K_JOY1,
+	K_JOY2,
+	K_JOY3,
+	K_JOY4,
+	K_JOY5,
+	K_JOY6,
+	K_JOY7,
+	K_JOY8,
+	K_JOY9,
+	K_JOY10,
+	K_JOY11,
+	K_JOY12,
+	K_JOY13,
+	K_JOY14,
+	K_JOY15,
+	K_JOY16,
+	K_JOY17,
+	K_JOY18,
+	K_JOY19,
+	K_JOY20,
+	K_JOY21,
+	K_JOY22,
+	K_JOY23,
+	K_JOY24,
+	K_JOY25,
+	K_JOY26,
+	K_JOY27,
+	K_JOY28,
+	K_JOY29,
+	K_JOY30,
+	K_JOY31,
+	K_JOY32,
+
+	K_AUX1,
+	K_AUX2,
+	K_AUX3,
+	K_AUX4,
+	K_AUX5,
+	K_AUX6,
+	K_AUX7,
+	K_AUX8,
+	K_AUX9,
+	K_AUX10,
+	K_AUX11,
+	K_AUX12,
+	K_AUX13,
+	K_AUX14,
+	K_AUX15,
+	K_AUX16,
+
+	K_LAST_KEY		// this had better be <256!
+} keyNum_t;
+
+#define	BUTTON_ATTACK		1
+#define	BUTTON_TALK			2			// displays talk balloon and disables actions
+#define	BUTTON_USE_HOLDABLE	4
+#define	BUTTON_GESTURE		8
+#define	BUTTON_WALKING		16			// walking can't just be infered from MOVE_RUN
+										// because a key pressed late in the frame will
+										// only generate a small move value for that frame
+										// walking will use different animations and
+										// won't generate footsteps
+#define BUTTON_AFFIRMATIVE	32
+#define	BUTTON_NEGATIVE		64
+
+#define BUTTON_GETFLAG		128
+#define BUTTON_GUARDBASE	256
+#define BUTTON_PATROL		512
+#define BUTTON_FOLLOWME		1024
+
+#define	BUTTON_ANY			2048			// any key whatsoever
+
+#define	CS_SERVERINFO		0		// an info string with all the serverinfo cvars
+#define	CS_SYSTEMINFO		1		// an info string for server system to client system configuration (timescale, etc)
+
+#define	CS_MUSIC				2
+#define	CS_MESSAGE				3		// from the map worldspawn's message field
+#define	CS_MOTD					4		// g_motd string for server message of the day
+#define	CS_WARMUP				5		// server time when the match will be restarted
+#define	CS_SCORES1				6
+#define	CS_SCORES2				7
+#define CS_VOTE_TIME			8
+#define CS_VOTE_STRING			9
+#define	CS_VOTE_YES				10
+#define	CS_VOTE_NO				11
+
+#define CS_TEAMVOTE_TIME		12
+#define CS_TEAMVOTE_STRING		14
+#define	CS_TEAMVOTE_YES			16
+#define	CS_TEAMVOTE_NO			18
+
+#define	CS_GAME_VERSION			20
+#define	CS_LEVEL_START_TIME		21		// so the timer only shows the current level
+#define	CS_INTERMISSION			22		// when 1, fraglimit/timelimit has been hit and intermission will start in a second or two
+#define CS_FLAGSTATUS			23		// string indicating flag status in CTF
+#define CS_SHADERSTATE			24
+#define CS_BOTINFO				25
+
+#define	CS_ITEMS				27		// string of 0's and 1's that tell which items are present
+
+#define	CS_MODELS				32
+
+typedef enum {
+	GT_FFA,				// free for all
+	GT_TOURNAMENT,		// one on one tournament
+	GT_SINGLE_PLAYER,	// single player ffa
+
+	//-- team games go after this --
+
+	GT_TEAM,			// team deathmatch
+	GT_CTF,				// capture the flag
+	GT_1FCTF,
+	GT_OBELISK,
+	GT_HARVESTER,
+	GT_MAX_GAME_TYPE
+} gametype_t;

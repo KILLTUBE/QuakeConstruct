@@ -1,0 +1,3 @@
+|| Arguments: || hookname(string), hookfunction(function) ||
+|| Returns: || <nothing> ||
+|| Example: || <none> ||

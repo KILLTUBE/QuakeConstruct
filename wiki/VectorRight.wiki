@@ -1,0 +1,3 @@
+|| Arguments: || angle([Vector]) ||
+|| Returns: || a right facing normal based off of the provided angle as a [Vector] ||
+|| Example: || <none> ||

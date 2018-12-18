@@ -1,0 +1,10 @@
+A table containing to following things:
+ * allsolid(boolean)
+ * contents(number)
+ * entity([Entity])
+ * normal([Vector])
+ * surfaceflags(number)
+ * startsolid(boolean)
+ * endpos([Vector])
+ * fraction(number)
+ * hit(boolean)
